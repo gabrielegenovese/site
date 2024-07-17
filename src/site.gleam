@@ -1,6 +1,6 @@
-import cat/entity.{type Model, type Msg, Model}
-import cat/update.{update}
-import cat/view.{view}
+import cv/entity.{type Model, type Msg, Model}
+import cv/update.{update}
+import cv/view.{view}
 import lustre
 import lustre/effect
 
