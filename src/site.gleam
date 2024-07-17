@@ -1,5 +1,10 @@
-import gleam/io
+import lustre
+import lustre/attribute.{style}
+import lustre/element/html
 
 pub fn main() {
-  io.println("Hello from site!")
+  let app = lustre.element(html.h1([], [html.text("ciao mond")]))
+  let assert Ok(_) = lustre.start(app, "#app", Nil)
+
+  Nil
 }
