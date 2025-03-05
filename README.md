@@ -1,7 +1,7 @@
-# site
+# Personal site
 
 ## Start
 
 ```sh
-gleam run -m lustre/dev start
+echo boh
 ```
