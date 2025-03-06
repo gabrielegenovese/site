@@ -1,7 +1,7 @@
 # Personal site
 
-## Start
+## Build
 
 ```sh
-echo boh
+./build.sh
 ```
