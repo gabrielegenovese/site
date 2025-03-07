@@ -7,8 +7,8 @@ import website/component/header
 pub fn head(page: String) -> Element(a) {
   html.head([], [
     html.meta([attribute("charset", "UTF-8")]),
-    html.title([], "Gabriele Genovese" <> page),
-    html.link([attribute.href("/style.css"), attribute.rel("stylesheet")]),
+    html.title([], "Gabriele Genovese " <> page),
+    html.link([attribute.href("./style.css"), attribute.rel("stylesheet")]),
     html.link([
       attribute.type_("image/svg+xml"),
       attribute.href("/favicon.svg"),

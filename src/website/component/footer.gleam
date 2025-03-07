@@ -31,7 +31,7 @@ pub fn view() -> Element(a) {
         ],
         [
           html.img([
-            attribute.src("/images/" <> social.icon),
+            attribute.src("./images/" <> social.icon),
             attribute.alt(social.name),
             attribute.title(social.name),
             attribute.class("w-icon"),
