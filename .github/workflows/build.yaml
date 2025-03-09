@@ -1,4 +1,4 @@
-name: test
+name: build
 
 on:
   push:
@@ -22,5 +22,5 @@ jobs:
       - name: Upload priv directory
         uses: actions/upload-artifact@v4
         with:
-          name: priv-folder
+          name: priv
           path: priv/
