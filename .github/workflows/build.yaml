@@ -19,6 +19,12 @@ jobs:
       - run: gleam test
       - run: gleam format --check src test
       - run: gleam run -m build
+      - name: Install npm dependencies
+        run: |
+          sudo apt-get install -y npm
+          npm install
+      - name: Build Tailwind CSS
+        run: npx tailwindcss -i ./static/main.css -o ./priv/style.css
       - name: Upload priv directory
         uses: actions/upload-artifact@v4
         with:
