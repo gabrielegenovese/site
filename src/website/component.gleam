@@ -26,11 +26,14 @@ pub fn head(page: String) -> Element(a) {
 pub fn page(name: String, content: List(Element(a))) -> Element(a) {
   html.html([attribute("lang", "en")], [
     head(name),
-    html.body([attribute.class("min-h-screen bg-slate-800 text-white")], [
-      header.view(name),
-      html.main([attribute.class("py-24")], content),
-      footer.view(),
-    ]),
+    html.body(
+      [attribute.class("min-h-screen bg-slate-800 text-white flex flex-col")],
+      [
+        header.view(name),
+        html.main([attribute.class("flex-grow")], content),
+        footer.view(),
+      ],
+    ),
   ])
 }
 
@@ -40,13 +43,13 @@ pub fn text_page(
   content: List(Element(a)),
 ) -> Element(a) {
   page(title, [
-    html.div([attribute.class("mx-auto max-w-3xl")], [
+    html.div([attribute.class("mx-auto mt-20 max-w-3xl")], [
       html.h1(
         [attribute.class("text-3xl font-bold leading-tight text-center")],
         [html.text(header)],
       ),
     ]),
-    html.div([attribute.class("mx-auto max-w-4xl py-8 leading-8")], [
+    html.div([attribute.class("mx-auto max-w-4xl py-4 leading-8")], [
       html.p([attribute.class("text-xl")], content),
     ]),
   ])

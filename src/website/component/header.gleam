@@ -32,9 +32,9 @@ pub fn view(page: String) -> Element(a) {
 
 fn nav_bar(current_page: String) -> Element(a) {
   html.ul(
-    [attribute.class("flex space-x-4")],
+    [attribute.class("flex")],
     list.map(pages, fn(page) {
-      let default_style = "text-xl font-bold p-2"
+      let default_style = "text-xl font-bold p-2 flex-center"
       let element = case page.name == current_page {
         True ->
           html.span(

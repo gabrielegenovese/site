@@ -17,27 +17,29 @@ const socials = [
 
 pub fn view() -> Element(a) {
   html.footer(
-    [
-      attribute.class(
-        "right-3 bottom-3 fixed h-16 bg-blue-900 p-3.5 flex flex-row gap-4 items-center overflow-hidden rounded-full",
-      ),
-    ],
+    [attribute.class("bg-gray-800 text-white p-2 flex flex-row")],
     list.map(socials, fn(social) {
       html.a(
         [
           attribute.href(social.url),
           attribute.target("_blank"),
-          attribute.class("shrink-0"),
+          attribute.class("shrink-0 mx-2 flex-none"),
         ],
         [
           html.img([
             attribute.src("./images/" <> social.icon),
             attribute.alt(social.name),
             attribute.title(social.name),
-            attribute.class("w-icon"),
+            attribute.class("w-6"),
           ]),
         ],
       )
-    }),
+    })
+      |> list.append([
+        html.div([attribute.class("w-64 text-center flex-auto")], [
+          html.text("© 2025 Gabriele Genovese"),
+          html.text(""),
+        ]),
+      ]),
   )
 }
