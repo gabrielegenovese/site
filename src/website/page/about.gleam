@@ -11,7 +11,8 @@ pub fn view() {
       html.span([attribute.class("text-lg")], [
         html.text(
           "I'm a Master's student in Computer Science at the University of Bologna.
-            Passionate about programming languages and the theory behind computing.",
+           Passionate about programming languages and the theory behind computing.
+           This site is self-hosted and created with Gleam.",
         ),
       ]),
     ]),

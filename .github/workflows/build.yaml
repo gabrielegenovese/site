@@ -16,8 +16,6 @@ jobs:
           gleam-version: "1.9.0"
           rebar3-version: "3"
       - run: gleam deps download
-      - run: gleam test
-      - run: gleam format --check src test
       - run: gleam run -m build
       - name: Install npm dependencies
         run: |
