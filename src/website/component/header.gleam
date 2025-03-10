@@ -9,7 +9,8 @@ type PageRoute {
   PageRoute(name: String, url: String)
 }
 
-const pages = [PageRoute("About", "./about"), PageRoute("Contact", "./contact")]
+// const pages = [PageRoute("About", "./about.html"), PageRoute("Contact", "./contact.html")]
+const pages = [PageRoute("Contact", "./contact.html")]
 
 pub fn view(page: String) -> Element(a) {
   html.header([attribute.class("bg-blue-700 flex w-full select-none fixed")], [
