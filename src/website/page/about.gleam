@@ -16,9 +16,9 @@ pub fn view() {
         propic(),
         html.span([attribute.class("text-lg p-3")], [
           html.text(
-            "I'm a Master's student in Computer Science at the University of Bologna.
+            "I'm a Master's student in Computer Science at the University of Bologna💻.
              Passionate about programming languages and the theory behind distributed computing.
-             This site is self-hosted and created with Gleam.",
+             This site is self-hosted🌐 and created with Gleam💫.",
           ),
         ]),
       ],
