@@ -13,33 +13,61 @@ const socials = [
     name: "Github",
     url: "https://github.com/gabrielegenovese",
   ),
+  Social(
+    icon: "matrix.png",
+    name: "Matrix",
+    url: "https://matrix.to/#/@gabrigeno:cappuccino.ovh",
+  ),
+  Social(
+    icon: "mail.png",
+    name: "Mail",
+    url: "mailto:gabriele.genovese2@studio.unibo.it",
+  ),
+  Social(
+    icon: "linkedin.png",
+    name: "Linkedin",
+    url: "https://www.linkedin.com/in/gabriele-genovese-63702a226/",
+  ),
 ]
 
 pub fn view() -> Element(a) {
   html.footer(
-    [attribute.class("bg-gray-800 text-white p-2 flex flex-row")],
-    list.map(socials, fn(social) {
-      html.a(
+    [
+      attribute.class(
+        "bg-gray-800 text-white p-2 max-w-6xl mx-auto flex flex-col items-center sm:flex-row 
+              sm:justify-between relative text-center w-full",
+      ),
+    ],
+    [
+      html.div(
         [
-          attribute.href(social.url),
-          attribute.target("_blank"),
-          attribute.class("shrink-0 mx-2 flex-none"),
+          attribute.class(
+            "p-2 flex space-x-4 sm:mb-0 sm:absolute sm:left-0 sm:top-1/2 
+                sm:-translate-y-1/2",
+          ),
         ],
-        [
-          html.img([
-            attribute.src("./images/" <> social.icon),
-            attribute.alt(social.name),
-            attribute.title(social.name),
-            attribute.class("w-6"),
-          ]),
-        ],
-      )
-    })
-      |> list.append([
-        html.div([attribute.class("w-64 text-center flex-auto")], [
-          html.text("© 2025 Gabriele Genovese"),
-          html.text(""),
-        ]),
+        list.map(socials, fn(social) {
+          html.a(
+            [
+              attribute.href(social.url),
+              attribute.target("_blank"),
+              // attribute.class("shrink-0 mx-2 flex-none"),
+            ],
+            [
+              html.img([
+                attribute.src("./images/" <> social.icon),
+                attribute.alt(social.name),
+                attribute.title(social.name),
+                attribute.class("h-6 w-6 rounded-full object-cover"),
+              ]),
+            ],
+          )
+        }),
+      ),
+      html.div([attribute.class("flex text-md w-full justify-center")], [
+        html.text("© 2025 Gabriele Genovese"),
+        html.text(""),
       ]),
+    ],
   )
 }
