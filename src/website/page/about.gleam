@@ -9,7 +9,7 @@ pub fn view() {
     html.div(
       [
         attribute.class(
-          "max-w-4xl mx-auto flex flex-col md:flex-row items-center text-center md:text-left",
+          "max-w-4xl mx-auto flex flex-col md:text-xl sm:text-xl md:flex-row items-center text-center md:text-left",
         ),
       ],
       [
@@ -30,7 +30,7 @@ fn propic() {
   html.img([
     attribute.id("homepage-profile-picture"),
     attribute.class(
-      "w-32 aspect-square object-cover rounded-full p-1 m-2 md:mb-0 md:mr-4",
+      "w-48 aspect-square object-cover rounded-full p-1 m-2 md:mb-0 md:mr-4",
     ),
     attribute.alt("me"),
     attribute.src(propic_src),

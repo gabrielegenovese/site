@@ -7,6 +7,10 @@ import website/component/header
 pub fn head(page: String) -> Element(a) {
   html.head([], [
     html.meta([attribute("charset", "UTF-8")]),
+    html.meta([
+      attribute("name", "viewport"),
+      attribute("content", "width=device-width, initial-scale=1.0"),
+    ]),
     html.title([], "Gabriele Genovese " <> page),
     html.link([attribute.href("./style.css"), attribute.rel("stylesheet")]),
     html.link([
@@ -53,8 +57,4 @@ pub fn text_page(
       html.p([attribute.class("text-xl")], content),
     ]),
   ])
-}
-
-pub fn dangerous_html(html: String) -> Element(a) {
-  html.span([attribute.attribute("dangerous-unescaped-html", html)], [])
 }

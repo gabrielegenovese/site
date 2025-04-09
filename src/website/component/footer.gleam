@@ -34,16 +34,16 @@ pub fn view() -> Element(a) {
   html.footer(
     [
       attribute.class(
-        "bg-gray-800 text-white p-2 max-w-6xl mx-auto flex flex-col items-center sm:flex-row 
-              sm:justify-between relative text-center w-full",
+        "bg-gray-800 text-white p-2 max-w-6xl mx-auto flex flex-col items-center md:flex-row 
+              md:justify-between relative text-center w-full",
       ),
     ],
     [
       html.div(
         [
           attribute.class(
-            "p-2 flex space-x-4 sm:mb-0 sm:absolute sm:left-0 sm:top-1/2 
-                sm:-translate-y-1/2",
+            "p-2 flex space-x-4 md:mb-0 md:absolute md:left-0 md:top-1/2 
+                md:-translate-y-1/2",
           ),
         ],
         list.map(socials, fn(social) {
