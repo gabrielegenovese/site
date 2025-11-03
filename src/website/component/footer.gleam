@@ -9,6 +9,11 @@ type Social {
 
 const socials = [
   Social(
+    icon: "scholar.png",
+    name: "Scholar",
+    url: "https://scholar.google.com/citations?user=e9En1Z8AAAAJ",
+  ),
+  Social(
     icon: "github.png",
     name: "Github",
     url: "https://github.com/gabrielegenovese",
