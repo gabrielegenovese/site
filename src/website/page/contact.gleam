@@ -2,7 +2,7 @@ import lustre/attribute.{attribute}
 import lustre/element/html
 import website/component
 
-const mail = "gabriele.genovese2@studio.unibo.it"
+const mail = "gabriele.genovese@univ-cotedazur.fr"
 
 pub fn view() {
   component.text_page("Contact", "Contact me", [
