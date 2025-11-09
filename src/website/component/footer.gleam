@@ -26,7 +26,7 @@ const socials = [
   Social(
     icon: "mail.png",
     name: "Mail",
-    url: "mailto:gabriele.genovese2@studio.unibo.it",
+    url: "mailto:gabriele.genovese@univ-cotedazur.fr",
   ),
   Social(
     icon: "linkedin.png",
