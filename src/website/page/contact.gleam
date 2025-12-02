@@ -36,13 +36,13 @@ fn render_email() {
       ],
       [html.text(mail)],
     ),
-    html.text(" or a Matrix message 💬 at "),
+    html.text(" or a message 💬 at my Matrix "),
     html.a(
       [
         attribute.class("text-blue-400 hover:underline"),
         attribute.href(matrix),
       ],
-      [html.text("matrix")],
+      [html.text("contact")],
     ),
     html.text("."),
   ])

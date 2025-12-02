@@ -73,6 +73,28 @@ pub fn view() -> Element(a) {
         html.text("© 2025 Gabriele Genovese"),
         html.text(""),
       ]),
+      html.a(
+        [
+          attribute.href("https://tcs4f.org"),
+          attribute.target("_blank"),
+          attribute.style(
+            "display: inline-block;
+             background-color: #004b1e;
+             border: 2px solid #CCCCCC;
+             padding: 5px;
+             margin: 10px;
+             border-radius: 5px;",
+            "",
+          ),
+        ],
+        [
+          html.img([
+            attribute.src("https://tcs4f.org/themes/tcs4f/img/logo_white.svg"),
+            attribute.alt("Theoretical Computer Scientists for Future"),
+            attribute.attribute("width", "100"),
+          ]),
+        ],
+      ),
     ],
   )
 }
