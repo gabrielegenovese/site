@@ -24,6 +24,14 @@ pub fn head(page: String) -> Element(a) {
       attribute.href("/favicon.ico"),
       attribute.rel("alternate icon"),
     ]),
+    html.script(
+      [
+        attribute("defer", ""),
+        attribute("data-domain", "cappuccino.ovh"),
+        attribute("src", "https://plausible.cappuccino.ovh/js/script.js"),
+      ],
+      "",
+    ),
   ])
 }
 
