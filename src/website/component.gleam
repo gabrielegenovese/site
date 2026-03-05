@@ -31,6 +31,7 @@ pub fn head(page: String) -> Element(a) {
           "src",
           "https://plausible.cappuccino.ovh/js/pa-ussrkTn5NrNgjRdbbyQr0.js",
         ),
+        attribute("data-domain", "cappuccino.ovh"),
       ],
       "",
     ),
