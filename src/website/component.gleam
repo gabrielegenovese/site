@@ -29,10 +29,10 @@ pub fn head(page: String) -> Element(a) {
         attribute("async", ""),
         attribute(
           "src",
-          "https://plausible.cappuccino.ovh/js/pa-U_shRqrBtPzO8xvrJGp-8.js",
+          "https://plausible.cappuccino.ovh/js/pa-ussrkTn5NrNgjRdbbyQr0.js",
         ),
       ],
-      "window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)};plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init()",
+      "window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}}; plausible.init()",
     ),
   ])
 }
