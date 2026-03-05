@@ -26,11 +26,13 @@ pub fn head(page: String) -> Element(a) {
     ]),
     html.script(
       [
-        attribute("defer", ""),
-        attribute("data-domain", "cappuccino.ovh"),
-        attribute("src", "https://plausible.cappuccino.ovh/js/script.js"),
+        attribute("async", ""),
+        attribute(
+          "src",
+          "https://plausible.cappuccino.ovh/js/pa-U_shRqrBtPzO8xvrJGp-8.js",
+        ),
       ],
-      "",
+      "window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)};plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init()",
     ),
   ])
 }
