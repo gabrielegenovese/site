@@ -12,6 +12,7 @@ type PageRoute {
 // const pages = [PageRoute("About", "./about.html"), PageRoute("Contact", "./contact.html")]
 const pages = [
   PageRoute("Contact", "./contact.html"),
+  PageRoute("Teaching", "./teaching.html"),
   PageRoute("CV", "/cv.pdf"),
 ]
 

@@ -24,21 +24,6 @@ pub fn head(page: String) -> Element(a) {
       attribute.href("/favicon.ico"),
       attribute.rel("alternate icon"),
     ]),
-    html.script(
-      [
-        attribute("async", ""),
-        attribute(
-          "src",
-          "https://plausible.cappuccino.ovh/js/pa-ussrkTn5NrNgjRdbbyQr0.js",
-        ),
-        attribute("data-domain", "cappuccino.ovh"),
-      ],
-      "",
-    ),
-    html.script(
-      [],
-      "window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}}; plausible.init()",
-    ),
   ])
 }
 

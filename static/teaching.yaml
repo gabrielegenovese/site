@@ -1,0 +1,12 @@
+- course: Introduction to Programming
+  year: "2025/2026"
+  semester: Spring
+  hours: 40
+  teacher: Alice Bianchi
+  university: University of Bologna
+
+  material:
+    - title: Lab 1
+      url: /pdf/teaching/lab1.pdf
+    - title: Slides
+      url: /pdf/teaching/slides.pdf
