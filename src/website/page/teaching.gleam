@@ -17,10 +17,18 @@ pub type Teaching {
 
 const teaching = [
   Teaching(
+    course: "Fundamentals of Computer Science",
+    year: "2026/2027",
+    semester: "Spring",
+    hours: 40,
+    teacher: "Prof. Cinzia Di Giusto",
+    university: "Université Côte d'Azur",
+  ),
+  Teaching(
     course: "Computer Architecture",
     year: "2026/2027",
     semester: "Autumn",
-    hours: 40,
+    hours: 30,
     teacher: "Prof. Ivan Lanese",
     university: "University of Bologna",
   ),
