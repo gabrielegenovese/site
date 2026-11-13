@@ -6,14 +6,23 @@ type Office {
   Office(city: String, state: String, address: String, office_number: String)
 }
 
-const office = Office(
-  city: "06900 Sophia-Antipolis",
-  state: "France",
-  address: "Euclide B, 2000 Rte des Lucioles",
-  office_number: "Office 306, Floor 3",
-)
+const office_sophia =
+  Office(
+    city: "06900 Sophia-Antipolis",
+    state: "France",
+    address: "Euclide B, 2000 Rte des Lucioles",
+    office_number: "Office 306, Floor 3",
+  )
 
-const mail = "gabriele.genovese@univ-cotedazur.fr"
+const office_bolo =
+  Office(
+    city: "40127 Bologna",
+    state: "Italy",
+    address: "Via Camillo Ranzani, 14/A",
+    office_number: "Unnamed Office",
+  )
+
+const mail = "gabrigeno@gmail.com"
 
 const matrix = "https://matrix.to/#/@gabrigeno:cappuccino.ovh"
 
@@ -21,7 +30,8 @@ pub fn view() {
   component.text_page("Contact", "Contact me", [
     html.div([attribute.class("text-md space-y-6")], [
       render_email(),
-      render_office(),
+      render_office(office_sophia),
+      render_office(office_bolo),
     ]),
   ])
 }
@@ -48,7 +58,7 @@ fn render_email() {
   ])
 }
 
-fn render_office() {
+fn render_office(office: Office) {
   html.div(
     [
       attribute.class(

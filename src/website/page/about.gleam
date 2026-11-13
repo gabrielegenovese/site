@@ -25,7 +25,7 @@ pub fn view() {
             html.text(
               "I'm a PhD Student in Computer Science at the Université Côte d'Azur💻.
              My PhD topic is about \"Failure Handling in Multiparty Session Types\".
-             Passionate about programming languages and the theory behind distributed computing.
+             I'm passionate about programming languages and the theory behind distributed computing.
              This site is self-hosted🌐 and created with Gleam💫.",
             ),
           ]),
@@ -153,7 +153,7 @@ fn find_field(entry: BibEntry, filter: String) -> String {
 
 fn render_entry(entry: BibEntry) {
   let title = find_field(entry, "title")
-  let author = find_field(entry, "author")
+  let coauthors = find_field(entry, "coauthors")
   let year = find_field(entry, "year")
   let conferance = find_field(entry, "conference")
   let pdf = find_field(entry, "pdf")
@@ -176,11 +176,11 @@ fn render_entry(entry: BibEntry) {
       ),
       attribute.attribute(
         "onmouseover",
-        "this.style.transform='translateY(-3px)'; this.style.boxShadow='0 6px 14px rgba(0,0,0,0.4)';",
+        "this.style.boxShadow='0 6px 14px rgba(0,0,0,0.4)';",
       ),
       attribute.attribute(
         "onmouseout",
-        "this.style.transform=''; this.style.boxShadow='0 4px 10px rgba(0,0,0,0.25)';",
+        "this.style.boxShadow='0 4px 10px rgba(0,0,0,0.25)';",
       ),
     ],
     [
@@ -200,7 +200,7 @@ fn render_entry(entry: BibEntry) {
       ),
       html.p(
         [attribute.attribute("style", "margin: 0.3rem 0; color: #d1d5db;")],
-        [html.text("Authors: " <> author)],
+        [html.text("Coauthors: " <> coauthors)],
       ),
       html.p(
         [attribute.attribute("style", "margin: 0.3rem 0; color: #9ca3af;")],

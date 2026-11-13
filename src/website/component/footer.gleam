@@ -23,11 +23,7 @@ const socials = [
     name: "Matrix",
     url: "https://matrix.to/#/@gabrigeno:cappuccino.ovh",
   ),
-  Social(
-    icon: "mail.png",
-    name: "Mail",
-    url: "mailto:gabriele.genovese@univ-cotedazur.fr",
-  ),
+  Social(icon: "mail.png", name: "Mail", url: "mailto:gabrigeno@gmail.com"),
   Social(
     icon: "linkedin.png",
     name: "Linkedin",
@@ -56,7 +52,6 @@ pub fn view() -> Element(a) {
             [
               attribute.href(social.url),
               attribute.target("_blank"),
-              // attribute.class("shrink-0 mx-2 flex-none"),
             ],
             [
               html.img([
