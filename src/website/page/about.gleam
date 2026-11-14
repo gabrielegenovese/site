@@ -4,6 +4,7 @@ import gleam/option.{Some}
 import gleam/regexp as re
 import gleam/result
 import lustre/attribute
+import lustre/element.{type Element}
 import lustre/element/html
 import simplifile
 import website/component
@@ -11,27 +12,96 @@ import website/component
 const propic_src = "./images/propic.jpg"
 
 pub fn view() {
-  component.text_page("About", "About me", [
-    html.div([attribute.class("flex flex-col")], [
-      html.div(
-        [
-          attribute.class(
-            "max-w-4xl mx-auto flex flex-col md:text-xl sm:text-xl md:flex-row items-center text-center md:text-left",
-          ),
-        ],
-        [
+  component.page("About", [
+    html.div([attribute.class("page-shell page-top")], [
+      html.div([attribute.class("page-content prose-site")], [
+        html.div([attribute.class("about-grid")], [
           propic(),
-          html.span([attribute.class("text-lg p-3")], [
-            html.text(
-              "I'm a PhD Student in Computer Science at the Université Côte d'Azur💻.
-             My PhD topic is about \"Failure Handling in Multiparty Session Types\".
-             I'm passionate about programming languages and the theory behind distributed computing.
-             This site is self-hosted🌐 and created with Gleam💫.",
-            ),
+          html.div([attribute.class("about-copy")], [
+            html.p([], [
+              html.text(
+                "I'm a PhD student in Computer Science at the Université Côte d'Azur.",
+              ),
+            ]),
+            html.p([], [
+              html.text(
+                "My PhD topic is about \"Failure Handling in Multiparty Session Types\".",
+              ),
+            ]),
+            html.p([], [
+              html.text(
+                "I'm passionate about programming languages and the theory behind distributed computing. This site is self-hosted and created with Gleam.",
+              ),
+            ]),
           ]),
+        ]),
+        html.div([], list.append(pubblications(), [schools()])),
+      ]),
+    ]),
+  ])
+}
+
+type School {
+  School(year: String, name: String, place: String, url: String)
+}
+
+const school_entries = [
+  School(
+    "2024",
+    "Lipari Summer School on Abstract Interpretation",
+    "Lipari, Italy",
+    "https://absint24.liparischool.it/",
+  ),
+  School(
+    "2025",
+    "Scottish Programming Languages and Verification Summer School (SPLV)",
+    "Edinburgh, Scotland",
+    "https://spli.scot/splv/2025-edinburgh",
+  ),
+  School(
+    "2026",
+    "Dutch Winter School on Logic and Verification",
+    "University of Twente, The Netherlands",
+    "https://cyclic-structures.gitlab.io/school2026",
+  ),
+  School(
+    "2026",
+    "ICTAC Postgraduate School on Formal Methods for Building Mission-Critical Systems",
+    "Bariloche, Argentina",
+    "https://ictac2026.github.io/school",
+  ),
+]
+
+fn schools() {
+  html.section([attribute.class("content-section content-section--compact")], [
+    html.h2([attribute.class("section-title")], [html.text("Schools")]),
+    html.ul(
+      [attribute.class("school-list")],
+      list.map(school_entries, render_school),
+    ),
+  ])
+}
+
+fn render_school(school: School) -> Element(a) {
+  let name = case school.url {
+    "" -> html.span([attribute.class("school-name")], [html.text(school.name)])
+    url ->
+      html.a(
+        [
+          attribute.class("school-name"),
+          attribute.href(url),
+          attribute.target("_blank"),
+          attribute.rel("noopener noreferrer"),
         ],
-      ),
-      html.div([attribute.class("flex flex-col")], pubblications()),
+        [html.text(school.name)],
+      )
+  }
+
+  html.li([attribute.class("school-entry")], [
+    html.span([attribute.class("school-year")], [html.text(school.year)]),
+    html.span([attribute.class("school-body")], [
+      name,
+      html.span([attribute.class("school-place")], [html.text(school.place)]),
     ]),
   ])
 }
@@ -39,9 +109,7 @@ pub fn view() {
 fn propic() {
   html.img([
     attribute.id("homepage-profile-picture"),
-    attribute.class(
-      "w-48 aspect-square object-cover rounded-full p-1 m-2 md:mb-0 md:mr-4",
-    ),
+    attribute.class("profile-pic"),
     attribute.alt("me"),
     attribute.src(propic_src),
   ])
@@ -69,38 +137,10 @@ fn parse_and_create(title: String, filepath: String) {
       let entries = parse_bibtex(content)
       let elements = entries |> list.map(render_entry)
 
-      html.div(
-        [
-          attribute.attribute(
-            "style",
-            "
-              font-family: 'Inter', sans-serif;
-              padding: 2rem 1rem;
-              color: #e5e7eb;
-            ",
-          ),
-        ],
-        [
-          html.h3(
-            [
-              attribute.attribute(
-                "style",
-                "
-                  font-weight: 700;
-                  font-size: 1.4rem;
-                  margin-bottom: 1rem;
-                  color: #f5f5f5;
-                  border-bottom: 2px solid #3b0a7a;
-                  display: inline-block;
-                  padding-bottom: 0.25rem;
-                ",
-              ),
-            ],
-            [html.text(title)],
-          ),
-          ..elements
-        ],
-      )
+      html.section([attribute.class("content-section")], [
+        html.h2([attribute.class("section-title")], [html.text(title)]),
+        ..elements
+      ])
     }
     Error(_) -> {
       io.println("Didn't find " <> filepath)
@@ -156,160 +196,81 @@ fn render_entry(entry: BibEntry) {
   let coauthors = find_field(entry, "coauthors")
   let year = find_field(entry, "year")
   let conferance = find_field(entry, "conference")
+  let venue_url = find_field(entry, "venue_url")
   let pdf = find_field(entry, "pdf")
   let slides = find_field(entry, "slides")
   let poster = find_field(entry, "poster")
+  let website = find_field(entry, "website")
+  let website_label = case find_field(entry, "website_label") {
+    "" -> "Website"
+    label -> label
+  }
 
-  html.div(
-    [
-      attribute.attribute(
-        "style",
-        "
-          border: 1px solid #3b0a7a;
-          border-radius: 14px;
-          padding: 1.25rem;
-          margin: 1rem 0;
-          background: linear-gradient(180deg, #0d0d17 0%, #111122 100%);
-          box-shadow: 0 4px 10px rgba(0,0,0,0.25);
-          transition: transform 0.2s ease, box-shadow 0.2s ease;
-        ",
-      ),
-      attribute.attribute(
-        "onmouseover",
-        "this.style.boxShadow='0 6px 14px rgba(0,0,0,0.4)';",
-      ),
-      attribute.attribute(
-        "onmouseout",
-        "this.style.boxShadow='0 4px 10px rgba(0,0,0,0.25)';",
-      ),
-    ],
-    [
-      html.h4(
-        [
-          attribute.attribute(
-            "style",
-            "
-              font-weight: 700;
-              font-size: 1.05rem;
-              margin-bottom: 0.6rem;
-              color: #f0eaff;
-            ",
-          ),
-        ],
-        [html.text(title)],
-      ),
-      html.p(
-        [attribute.attribute("style", "margin: 0.3rem 0; color: #d1d5db;")],
-        [html.text("Coauthors: " <> coauthors)],
-      ),
-      html.p(
-        [attribute.attribute("style", "margin: 0.3rem 0; color: #9ca3af;")],
-        [html.text("Year: " <> year)],
-      ),
+  html.article([attribute.class("bib-entry")], [
+    html.h3([attribute.class("bib-title")], [html.text(title)]),
+    html.dl([attribute.class("bib-meta")], [
+      case coauthors {
+        "" -> html.text("")
+        _ -> meta_row("Coauthors", coauthors)
+      },
+      case year {
+        "" -> html.text("")
+        _ -> meta_row("Year", year)
+      },
       case conferance {
         "" -> html.text("")
-        _ ->
-          html.p(
-            [attribute.attribute("style", "margin: 0.3rem 0; color: #a78bfa;")],
-            [html.text("Conference: " <> conferance)],
-          )
+        _ -> venue_row("Venue", conferance, venue_url)
       },
-      // --- Optional section for PDF, Slides, Poster as colored text links ---
-      html.div(
+    ]),
+    html.div([attribute.class("bib-links")], [
+      resource_link(pdf, "PDF"),
+      resource_link(slides, "Slides"),
+      resource_link(poster, "Poster"),
+      resource_link(website, website_label),
+    ]),
+  ])
+}
+
+fn meta_row(label: String, value: String) -> Element(a) {
+  html.div([attribute.class("bib-meta-row")], [
+    html.dt([], [html.text(label)]),
+    html.dd([], [html.text(value)]),
+  ])
+}
+
+fn venue_row(label: String, value: String, url: String) -> Element(a) {
+  let venue = case url {
+    "" -> html.text(value)
+    _ ->
+      html.a(
         [
-          attribute.attribute(
-            "style",
-            "
-              display: flex;
-              gap: 0.8rem;
-              margin-top: 0.6rem;
-              flex-wrap: wrap;
-              font-weight: 600;
-              font-size: 0.95rem;
-            ",
-          ),
+          attribute.class("venue-link"),
+          attribute.href(url),
+          attribute.target("_blank"),
+          attribute.rel("noopener noreferrer"),
         ],
+        [html.text(value)],
+      )
+  }
+
+  html.div([attribute.class("bib-meta-row bib-meta-row--venue")], [
+    html.dt([], [html.text(label)]),
+    html.dd([], [venue]),
+  ])
+}
+
+fn resource_link(href: String, label: String) -> Element(a) {
+  case href {
+    "" -> html.text("")
+    _ ->
+      html.a(
         [
-          case pdf {
-            "" -> html.text("")
-            _ ->
-              html.a(
-                [
-                  attribute.href(pdf),
-                  attribute.target("_blank"),
-                  attribute.attribute(
-                    "style",
-                    "
-                      color: #facc15;
-                      text-decoration: none;
-                    ",
-                  ),
-                  attribute.attribute(
-                    "onmouseover",
-                    "this.style.textDecoration='underline';",
-                  ),
-                  attribute.attribute(
-                    "onmouseout",
-                    "this.style.textDecoration='none';",
-                  ),
-                ],
-                [html.text("PDF")],
-              )
-          },
-          case slides {
-            "" -> html.text("")
-            _ ->
-              html.a(
-                [
-                  attribute.href(slides),
-                  attribute.target("_blank"),
-                  attribute.attribute(
-                    "style",
-                    "
-                      color: #60a5fa;
-                      text-decoration: none;
-                    ",
-                  ),
-                  attribute.attribute(
-                    "onmouseover",
-                    "this.style.textDecoration='underline';",
-                  ),
-                  attribute.attribute(
-                    "onmouseout",
-                    "this.style.textDecoration='none';",
-                  ),
-                ],
-                [html.text("Slides")],
-              )
-          },
-          case poster {
-            "" -> html.text("")
-            _ ->
-              html.a(
-                [
-                  attribute.href(poster),
-                  attribute.target("_blank"),
-                  attribute.attribute(
-                    "style",
-                    "
-                      color: #f87171;
-                      text-decoration: none;
-                    ",
-                  ),
-                  attribute.attribute(
-                    "onmouseover",
-                    "this.style.textDecoration='underline';",
-                  ),
-                  attribute.attribute(
-                    "onmouseout",
-                    "this.style.textDecoration='none';",
-                  ),
-                ],
-                [html.text("Poster")],
-              )
-          },
+          attribute.class("pill-link"),
+          attribute.href(href),
+          attribute.target("_blank"),
+          attribute.rel("noopener noreferrer"),
         ],
-      ),
-    ],
-  )
+        [html.text(label)],
+      )
+  }
 }

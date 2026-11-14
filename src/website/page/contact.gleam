@@ -28,61 +28,44 @@ const matrix = "https://matrix.to/#/@gabrigeno:cappuccino.ovh"
 
 pub fn view() {
   component.text_page("Contact", "Contact me", [
-    html.div([attribute.class("text-md space-y-6")], [
-      render_email(),
+    html.p([attribute.class("contact-lead")], [
+      html.text("You can reach me by email at "),
+      html.a(
+        [
+          attribute.class("inline-link"),
+          attribute.href("mailto:" <> mail),
+        ],
+        [html.text(mail)],
+      ),
+      html.text(" or on Matrix at "),
+      html.a(
+        [
+          attribute.class("inline-link"),
+          attribute.href(matrix),
+          attribute.target("_blank"),
+          attribute.rel("noopener noreferrer"),
+        ],
+        [html.text("gabrigeno:cappuccino.ovh")],
+      ),
+      html.text("."),
+    ]),
+    html.div([attribute.class("contact-grid")], [
       render_office(office_sophia),
       render_office(office_bolo),
     ]),
   ])
 }
 
-fn render_email() {
-  html.div([], [
-    html.text("If you want to reach out to me, you can send an email ✉️ at "),
-    html.a(
-      [
-        attribute.class("text-orange-400 hover:underline"),
-        attribute.href("mailto:" <> mail),
-      ],
-      [html.text(mail)],
-    ),
-    html.text(" or a message 💬 at my Matrix "),
-    html.a(
-      [
-        attribute.class("text-blue-400 hover:underline"),
-        attribute.href(matrix),
-      ],
-      [html.text("contact")],
-    ),
-    html.text("."),
-  ])
-}
-
 fn render_office(office: Office) {
-  html.div(
-    [
-      attribute.class(
-        "border border-indigo-900 rounded-lg p-4 bg-[#0d0d17] shadow-md max-w-lg",
-      ),
-    ],
-    [
-      html.h3(
-        [
-          attribute.class(
-            "text-lg font-semibold text-purple-300 border-b border-indigo-800 pb-1 mb-2",
-          ),
-        ],
-        [html.text("🏢 Office Location")],
-      ),
-      html.p([attribute.class("text-gray-300")], [
-        html.text("📍 " <> office.address),
-      ]),
-      html.p([attribute.class("text-gray-400")], [
-        html.text("🌆 " <> office.city <> ", " <> office.state),
-      ]),
-      html.p([attribute.class("text-gray-400 italic mt-1")], [
-        html.text("🔢 " <> office.office_number),
-      ]),
-    ],
-  )
+  html.article([attribute.class("info-card")], [
+    html.h2([attribute.class("info-card__title")], [
+      html.text(office.city <> ", " <> office.state),
+    ]),
+    html.p([attribute.class("info-card__line")], [
+      html.text(office.address),
+    ]),
+    html.p([attribute.class("info-card__line info-card__line--small")], [
+      html.text(office.office_number),
+    ]),
+  ])
 }

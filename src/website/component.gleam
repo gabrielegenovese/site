@@ -11,6 +11,11 @@ pub fn head(page: String) -> Element(a) {
       attribute("name", "viewport"),
       attribute("content", "width=device-width, initial-scale=1.0"),
     ]),
+    html.meta([
+      attribute("name", "theme-color"),
+      attribute.content("#fcfbf8"),
+    ]),
+    html.script([attribute.src("./theme.js")], ""),
     html.title([], "Gabriele Genovese " <> page),
     html.link([attribute.href("./style.css"), attribute.rel("stylesheet")]),
     html.link([
@@ -30,14 +35,11 @@ pub fn head(page: String) -> Element(a) {
 pub fn page(name: String, content: List(Element(a))) -> Element(a) {
   html.html([attribute("lang", "en")], [
     head(name),
-    html.body(
-      [attribute.class("min-h-screen bg-slate-800 text-white flex flex-col")],
-      [
-        header.view(name),
-        html.main([attribute.class("flex-grow")], content),
-        footer.view(),
-      ],
-    ),
+    html.body([attribute.class("site-body flex min-h-screen flex-col")], [
+      header.view(name),
+      html.main([attribute.class("site-main flex-grow")], content),
+      footer.view(),
+    ]),
   ])
 }
 
@@ -47,14 +49,13 @@ pub fn text_page(
   content: List(Element(a)),
 ) -> Element(a) {
   page(title, [
-    html.div([attribute.class("mx-auto mt-20 max-w-3xl")], [
-      html.h1(
-        [attribute.class("text-3xl font-bold leading-tight text-center")],
-        [html.text(header)],
-      ),
+    html.section([attribute.class("page-hero")], [
+      html.div([attribute.class("page-shell")], [
+        html.h1([attribute.class("page-title")], [html.text(header)]),
+      ]),
     ]),
-    html.div([attribute.class("mx-auto max-w-4xl py-4 leading-8")], [
-      html.p([attribute.class("text-xl")], content),
+    html.div([attribute.class("page-shell")], [
+      html.div([attribute.class("page-content prose-site")], content),
     ]),
   ])
 }
