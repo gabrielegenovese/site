@@ -5,26 +5,53 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+
+concurrency:
+  group: site-deploy
+  cancel-in-progress: true
+
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: erlef/setup-beam@v1
         with:
           otp-version: "27.1.2"
           gleam-version: "1.13.0"
           rebar3-version: "3"
-      - run: gleam deps download
-      - run: gleam run -m build
-      - name: Install npm dependencies
+
+      - name: Build the site
         run: |
-          sudo apt-get install -y npm
-          npm install
+          gleam deps download
+          gleam run -m build
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
       - name: Build Tailwind CSS
         run: npx tailwindcss -i ./static/main.css -o ./priv/style.css
+
       - name: Upload priv directory
         uses: actions/upload-artifact@v4
         with:
           name: priv
           path: priv/
+
+      - name: Publish built site to the deploy branch
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./priv
+          publish_branch: deploy
+          force_orphan: true
+          user_name: github-actions[bot]
+          user_email: github-actions[bot]@users.noreply.github.com
