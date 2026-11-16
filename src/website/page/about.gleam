@@ -47,16 +47,10 @@ type School {
 
 const school_entries = [
   School(
-    "2024",
-    "Lipari Summer School on Abstract Interpretation",
-    "Lipari, Italy",
-    "https://absint24.liparischool.it/",
-  ),
-  School(
-    "2025",
-    "Scottish Programming Languages and Verification Summer School (SPLV)",
-    "Edinburgh, Scotland",
-    "https://spli.scot/splv/2025-edinburgh",
+    "2026",
+    "ICTAC Postgraduate School on Formal Methods for Building Mission-Critical Systems",
+    "Bariloche, Argentina",
+    "https://ictac2026.github.io/school",
   ),
   School(
     "2026",
@@ -65,10 +59,16 @@ const school_entries = [
     "https://cyclic-structures.gitlab.io/school2026",
   ),
   School(
-    "2026",
-    "ICTAC Postgraduate School on Formal Methods for Building Mission-Critical Systems",
-    "Bariloche, Argentina",
-    "https://ictac2026.github.io/school",
+    "2025",
+    "Scottish Programming Languages and Verification Summer School (SPLV)",
+    "Edinburgh, Scotland",
+    "https://spli.scot/splv/2025-edinburgh",
+  ),
+  School(
+    "2024",
+    "Lipari Summer School on Abstract Interpretation",
+    "Lipari, Italy",
+    "https://absint24.liparischool.it/",
   ),
 ]
 
